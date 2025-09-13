@@ -1,5 +1,16 @@
 {
   "mcpServers": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time",
+        "--local-timezone=Asia/Ho_Chi_Minh"
+      ]
+    },
     "serena": {
       "type": "stdio",
       "command": "uvx",
@@ -14,6 +25,19 @@
         "/Users/anh_tuan.l/Workspace/ClaudeCodeWorkspace/vcd-claude-speckit"
       ],
       "env": {}
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
     }
   }
 }
