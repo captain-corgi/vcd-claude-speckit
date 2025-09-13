@@ -7,8 +7,8 @@ import (
 	"time"
 	"unicode"
 
-	"golang.org/x/crypto/bcrypt"
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // User represents a user in the system
@@ -115,8 +115,8 @@ func validateUserEmail(email string) error {
 		return errors.New("email cannot exceed 100 characters")
 	}
 
-	// Basic email regex
-	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	// More comprehensive email regex
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 	if !emailRegex.MatchString(email) {
 		return errors.New("email format is invalid")
 	}
@@ -215,7 +215,7 @@ func (u *User) UpdateRole(newRole UserRole) error {
 
 // UpdateEmail updates the user's email
 func (u *User) UpdateEmail(newEmail string) error {
-	if err := validateEmail(newEmail); err != nil {
+	if err := validateUserEmail(newEmail); err != nil {
 		return fmt.Errorf("invalid email: %w", err)
 	}
 
