@@ -1,0 +1,235 @@
+# Employee Management System GraphQL Schema
+
+scalar Date
+scalar DateTime
+scalar Upload
+
+# Core Types
+type Employee {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String
+    department: String!
+    position: String!
+    hireDate: Date!
+    salary: Float!
+    status: EmployeeStatus!
+    manager: Employee
+    directReports: [Employee!]!
+    address: Address
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Address {
+    street: String
+    city: String
+    state: String
+    postalCode: String
+    country: String
+}
+
+enum EmployeeStatus {
+    ACTIVE
+    TERMINATED
+    ON_LEAVE
+}
+
+type AuditLog {
+    id: ID!
+    employee: Employee!
+    operation: String!
+    userId: String!
+    timestamp: DateTime!
+    oldValues: JSON
+    newValues: JSON
+    ipAddress: String!
+    userAgent: String
+}
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    role: UserRole!
+    isActive: Boolean!
+    lastLogin: DateTime
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+enum UserRole {
+    ADMIN
+    MANAGER
+    VIEWER
+}
+
+# Input Types
+input CreateEmployeeInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String
+    department: String!
+    position: String!
+    hireDate: Date!
+    salary: Float!
+    managerId: ID
+    address: AddressInput
+}
+
+input UpdateEmployeeInput {
+    firstName: String
+    lastName: String
+    email: String
+    phone: String
+    department: String
+    position: String
+    salary: Float
+    managerId: ID
+    address: AddressInput
+}
+
+input AddressInput {
+    street: String
+    city: String
+    state: String
+    postalCode: String
+    country: String
+}
+
+input CreateUserInput {
+    username: String!
+    email: String!
+    password: String!
+    role: UserRole! = VIEWER
+}
+
+input UpdateUserInput {
+    username: String
+    email: String
+    password: String
+    role: UserRole
+    isActive: Boolean
+}
+
+input EmployeeFilter {
+    department: String
+    status: EmployeeStatus
+    managerId: ID
+    search: String
+}
+
+input EmployeeSort {
+    field: EmployeeSortField = NAME
+    direction: SortDirection = ASC
+}
+
+enum EmployeeSortField {
+    NAME
+    EMAIL
+    DEPARTMENT
+    POSITION
+    HIRE_DATE
+    SALARY
+    STATUS
+}
+
+enum SortDirection {
+    ASC
+    DESC
+}
+
+# Query Operations
+type Query {
+    # Employee queries
+    employee(id: ID!): Employee
+    employees(
+        first: Int
+        after: String
+        filter: EmployeeFilter
+        sort: EmployeeSort
+    ): EmployeeConnection!
+
+    # Audit queries
+    auditLogs(
+        employeeId: ID
+        operation: String
+        from: DateTime
+        to: DateTime
+        first: Int
+        after: String
+    ): AuditLogConnection!
+
+    # User queries (admin only)
+    user(id: ID!): User
+    users: [User!]!
+
+    # Health check
+    health: Health!
+}
+
+type Health {
+    status: String!
+    version: String!
+    timestamp: DateTime!
+}
+
+# Mutation Operations
+type Mutation {
+    # Employee mutations
+    createEmployee(input: CreateEmployeeInput!): Employee!
+    updateEmployee(id: ID!, input: UpdateEmployeeInput!): Employee!
+    deleteEmployee(id: ID!): Boolean!
+    changeEmployeeStatus(id: ID!, status: EmployeeStatus!): Employee!
+
+    # User mutations (admin only)
+    createUser(input: CreateUserInput!): User!
+    updateUser(id: ID!, input: UpdateUserInput!): User!
+    deleteUser(id: ID!): Boolean!
+
+    # Authentication
+    login(username: String!, password: String!): AuthPayload!
+    refreshToken(token: String!): AuthPayload!
+    logout: Boolean!
+}
+
+type AuthPayload {
+    token: String!
+    refreshToken: String!
+    user: User!
+}
+
+# Pagination Types
+type EmployeeConnection {
+    edges: [EmployeeEdge!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type EmployeeEdge {
+    node: Employee!
+    cursor: String!
+}
+
+type AuditLogConnection {
+    edges: [AuditLogEdge!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type AuditLogEdge {
+    node: AuditLog!
+    cursor: String!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+scalar JSON
