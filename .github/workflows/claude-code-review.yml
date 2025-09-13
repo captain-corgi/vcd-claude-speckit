@@ -3,8 +3,6 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize, labeled]
-  pull_request_target:
-    types: [labeled]
 
 jobs:
   claude-review:
