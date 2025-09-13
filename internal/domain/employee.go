@@ -153,8 +153,8 @@ func validateEmail(email string) error {
 		return errors.New("email cannot exceed 100 characters")
 	}
 
-	// Basic email regex
-	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	// More comprehensive email regex
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`)
 	if !emailRegex.MatchString(email) {
 		return errors.New("email format is invalid")
 	}

@@ -160,8 +160,8 @@ func createMigrateInstance(host, port, user, password, dbName string) (*migrate.
 }
 
 func createMigrationFile(name string) error {
-	timestamp := time.Now().Unix()
-	version := fmt.Sprintf("%06d", timestamp)
+	timestamp := time.Now().Format("20060102150405")
+	version := timestamp
 
 	// Create up migration file
 	upFileName := fmt.Sprintf("%s_%s.up.sql", version, name)
