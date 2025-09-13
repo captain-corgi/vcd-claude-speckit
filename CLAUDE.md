@@ -1,9 +1,14 @@
 # Claude Code Context for Employee Management System
 
+- ALWAYS Use Serena MCP for find, search semantic retrieval and editing files capabilities
+- Replace Bash(find, grep, sed, awk) with Serena MCP for file operations
+
 ## Project Overview
+
 Building an employee management web server with GraphQL API using Go, following Clean Architecture and Domain Driven Design patterns with Test Driven Development.
 
 ## Architecture
+
 - **Language**: Go 1.21+
 - **HTTP Framework**: Gin
 - **API**: GraphQL with gqlgen
@@ -13,6 +18,7 @@ Building an employee management web server with GraphQL API using Go, following 
 - **Authentication**: JWT with role-based access control
 
 ## Recent Changes (Last 3)
+
 1. **Feature 001**: Employee Management System - Initial implementation planning
    - Created GraphQL schema for Employee, User, and AuditLog entities
    - Defined database schema with proper constraints and triggers
@@ -32,6 +38,7 @@ Building an employee management web server with GraphQL API using Go, following 
 ## Code Patterns to Follow
 
 ### Go Conventions
+
 ```go
 // Use proper error handling
 if err != nil {
@@ -64,12 +71,14 @@ for _, tt := range tests {
 ```
 
 ### GraphQL Schema
+
 - Use code-first approach with gqlgen
 - Implement proper input validation
 - Include pagination for list queries
 - Add audit logging for all mutations
 
 ### Database Patterns
+
 ```go
 // Use GORM with proper model definitions
 type Employee struct {
@@ -87,18 +96,21 @@ func (r *employeeRepository) Create(ctx context.Context, employee *domain.Employ
 ```
 
 ### Authentication
+
 - JWT middleware for protected routes
 - Role-based access control (ADMIN, MANAGER, VIEWER)
 - Token refresh mechanism
 - Proper error handling for authentication failures
 
 ### Testing Principles
+
 - RED-GREEN-REFACTOR cycle strictly enforced
 - Tests MUST fail before implementation
 - Use real dependencies (actual PostgreSQL, not mocks)
 - Contract tests first, then integration, then unit tests
 
 ## Package Structure
+
 ```
 backend/
 ├── cmd/
@@ -123,30 +135,35 @@ backend/
 ```
 
 ## Dependencies Management
+
 - Use Go modules for dependency management
 - Keep dependencies minimal and well-maintained
 - Prefer standard library where possible
 - Document non-standard dependencies
 
 ## Configuration
+
 - Use Viper for configuration management
 - Support environment variables and config files
 - Provide sensible defaults
 - Include configuration validation
 
 ## Logging
+
 - Use Zap for structured logging
 - Include request correlation IDs
 - Log at appropriate levels (debug, info, warn, error)
 - Include relevant context in log messages
 
 ## Error Handling
+
 - Use proper error wrapping with fmt.Errorf
 - Provide clear error messages
 - Include error codes for client consumption
 - Log errors with appropriate context
 
 ## Security
+
 - Always use parameterized queries to prevent SQL injection
 - Validate all input data
 - Use HTTPS in production
@@ -154,12 +171,14 @@ backend/
 - Rate limiting for API endpoints
 
 ## Performance
+
 - Use database connection pooling
 - Implement proper indexing strategy
 - Cache frequently accessed data when appropriate
 - Monitor and optimize query performance
 
 ## Development Workflow
+
 1. Write failing test (RED)
 2. Make test pass (GREEN)
 3. Refactor code
@@ -168,6 +187,7 @@ backend/
 6. Repeat
 
 ## Testing Commands
+
 ```bash
 # Run all tests
 go test ./...
@@ -185,6 +205,7 @@ go test -v ./...
 ```
 
 ## Build Commands
+
 ```bash
 # Build the application
 go build -o bin/server cmd/server/main.go
