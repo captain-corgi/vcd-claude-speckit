@@ -31,7 +31,7 @@
 ## Format: `[ID] [P?] Description`
 - **[P]**: Can run in parallel (different files, no dependencies)
 - **TDD**: Tests written first, MUST fail, then implementation
-- Paths follow plan.md structure: `backend/`, `tests/`
+- Paths follow plan.md structure: `cmd/`, `internal/`, `pkg/`, `src/`, `tests/`
 
 ## Phase 3.1: Infrastructure Setup
 **Goal: Basic project structure and dependencies**
@@ -40,7 +40,7 @@
   `go mod init employee-management-system && go get github.com/gin-gonic/gin github.com/99designs/gqlgen github.com/spf13/viper github.com/golang-jwt/jwt/v5`
 
 - [ ] **T002** [P] Create project structure per plan.md
-  `backend/cmd/server/`, `backend/internal/domain/`, `backend/internal/service/`, `backend/pkg/`, `tests/`
+  `cmd/server/`, `cmd/migrate/`, `internal/domain/`, `internal/service/`, `internal/repository/`, `internal/api/`, `internal/middleware/`, `pkg/database/`, `pkg/logger/`, `pkg/config/`, `src/models/`, `src/services/`, `src/cli/`, `src/lib/`, `tests/`
 
 - [ ] **T003** [P] Configure Go development tools
   `.golangci.yml`, `Makefile` with test/lint/build targets, `.gitignore`
@@ -52,10 +52,10 @@
   `docker-compose.yml` with PostgreSQL service, volumes, environment variables
 
 - [ ] **T005** [P] Set up GORM with PostgreSQL connection pooling
-  `backend/pkg/database/database.go` with connection management, health checks
+  `pkg/database/database.go` with connection management, health checks
 
 - [ ] **T006** [P] Create database migration system
-  `backend/cmd/migrate/main.go` with golang-migrate, SQL files for employees/users/audit_logs tables
+  `cmd/migrate/main.go` with golang-migrate, SQL files for employees/users/audit_logs tables
 
 - [ ] **T007** [P] Configure testcontainers for integration tests
   `tests/helpers/database.go` with test PostgreSQL setup/teardown
@@ -87,46 +87,46 @@
 ## Phase 3.4: Domain Layer Implementation (GREEN PHASE)
 **Goal: Business entities and logic (only after tests are failing)**
 
-- [ ] **T015** [P] Employee domain entity in `backend/internal/domain/employee.go`
+- [ ] **T015** [P] Employee domain entity in `internal/domain/employee.go`
   Business logic, validation rules, state transitions per data-model.md
 
-- [ ] **T016** [P] User domain entity in `backend/internal/domain/user.go`
+- [ ] **T016** [P] User domain entity in `internal/domain/user.go`
   Authentication logic, role validation, password hashing
 
-- [ ] **T017** [P] AuditLog domain entity in `backend/internal/domain/audit.go`
+- [ ] **T017** [P] AuditLog domain entity in `internal/domain/audit.go`
   Immutable audit entries, operation tracking
 
-- [ ] **T018** [P] Domain services and interfaces in `backend/internal/domain/service.go`
+- [ ] **T018** [P] Domain services and interfaces in `internal/domain/service.go`
   EmployeeService, UserService, AuthService interfaces
 
 ## Phase 3.5: Data Access Layer
 **Goal: Repository pattern with GORM models**
 
-- [ ] **T019** [P] Employee GORM model in `backend/internal/repository/employee_model.go`
+- [ ] **T019** [P] Employee GORM model in `internal/repository/employee_model.go`
   Database mapping, constraints, indexes per data-model.md
 
-- [ ] **T020** [P] User GORM model in `backend/internal/repository/user_model.go`
+- [ ] **T020** [P] User GORM model in `internal/repository/user_model.go`
   Authentication fields, role constraints
 
-- [ ] **T021** [P] Employee repository implementation in `backend/internal/repository/employee_repository.go`
+- [ ] **T021** [P] Employee repository implementation in `internal/repository/employee_repository.go`
   CRUD operations, pagination, filtering with GORM
 
-- [ ] **T022** [P] User repository implementation in `backend/internal/repository/user_repository.go`
+- [ ] **T022** [P] User repository implementation in `internal/repository/user_repository.go`
   Authentication queries, user management
 
-- [ ] **T023** [P] Audit log repository in `backend/internal/repository/audit_repository.go`
+- [ ] **T023** [P] Audit log repository in `internal/repository/audit_repository.go`
   Immutable audit entry creation, querying
 
 ## Phase 3.6: Application Services
 **Goal: Business logic and orchestration**
 
-- [ ] **T024** Employee service implementation in `backend/internal/service/employee_service.go`
+- [ ] **T024** Employee service implementation in `internal/service/employee_service.go`
   Business rules, validation, audit logging per domain rules
 
-- [ ] **T025** User service implementation in `backend/internal/service/user_service.go`
+- [ ] **T025** User service implementation in `internal/service/user_service.go`
   Authentication, user management, role handling
 
-- [ ] **T026** JWT authentication service in `backend/internal/service/auth_service.go`
+- [ ] **T026** JWT authentication service in `internal/service/auth_service.go`
   Token generation, validation, refresh logic per research.md decisions
 
 ## Phase 3.7: GraphQL API Layer
@@ -135,36 +135,36 @@
 - [ ] **T027** [P] Generate gqlgen resolvers from schema.graphql
   Run `gqlgen generate` to create resolver interfaces
 
-- [ ] **T028** [P] Employee resolvers in `backend/internal/api/resolver_employee.go`
+- [ ] **T028** [P] Employee resolvers in `internal/api/resolver_employee.go`
   Implement all Employee-related GraphQL operations
 
-- [ ] **T029** [P] User resolvers in `backend/internal/api/resolver_user.go`
+- [ ] **T029** [P] User resolvers in `internal/api/resolver_user.go`
   Authentication and user management resolvers
 
-- [ ] **T030** [P] Audit log resolvers in `backend/internal/api/resolver_audit.go`
+- [ ] **T030** [P] Audit log resolvers in `internal/api/resolver_audit.go`
   Audit log querying with filtering/pagination
 
-- [ ] **T031** Health check resolver in `backend/internal/api/resolver_health.go`
+- [ ] **T031** Health check resolver in `internal/api/resolver_health.go`
 
 ## Phase 3.8: HTTP Server and Middleware
 **Goal: Gin server with security and logging**
 
-- [ ] **T032** [P] Gin server setup in `backend/cmd/server/main.go`
+- [ ] **T032** [P] Gin server setup in `cmd/server/main.go`
   HTTP server, GraphQL endpoint, playground, graceful shutdown
 
-- [ ] **T033** [P] JWT authentication middleware in `backend/internal/middleware/auth.go`
+- [ ] **T033** [P] JWT authentication middleware in `internal/middleware/auth.go`
   Token validation, user context injection per research.md
 
-- [ ] **T034** [P] Logging middleware in `backend/internal/middleware/logging.go`
+- [ ] **T034** [P] Logging middleware in `internal/middleware/logging.go`
   Structured logging with zap per research.md, request correlation
 
-- [ ] **T035** [P] Error handling middleware in `backend/internal/middleware/error.go`
+- [ ] **T035** [P] Error handling middleware in `internal/middleware/error.go`
   GraphQL error formatting, HTTP status codes
 
 ## Phase 3.9: Configuration and Environment
 **Goal: Viper configuration for all environments**
 
-- [ ] **T036** [P] Configuration system in `backend/pkg/config/config.go`
+- [ ] **T036** [P] Configuration system in `pkg/config/config.go`
   Environment variables, config files, validation per research.md
 
 ## Phase 3.10: Integration Tests (E2E Validation)

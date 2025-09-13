@@ -2,8 +2,8 @@ package contract_test
 
 import (
 	"context"
+	"net/http"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -26,13 +26,13 @@ func TestEmployee_CreatesEmployee(t *testing.T) {
 	ctx := context.Background()
 
 	input := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 		"address": map[string]interface{}{
 			"street":  "123 Main St",
 			"city":    "San Francisco",
@@ -101,12 +101,12 @@ func TestEmployee_ValidatesRequiredFields(t *testing.T) {
 
 	// Test missing firstName
 	input := map[string]interface{}{
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	query := `
@@ -132,13 +132,13 @@ func TestEmployee_ValidatesEmailFormat(t *testing.T) {
 	ctx := context.Background()
 
 	input := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "invalid-email",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "invalid-email",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	query := `
@@ -164,13 +164,13 @@ func TestEmployee_PreventsDuplicateEmail(t *testing.T) {
 
 	// Create first employee
 	firstInput := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	query := `
@@ -186,13 +186,13 @@ func TestEmployee_PreventsDuplicateEmail(t *testing.T) {
 
 	// Try to create second employee with same email
 	secondInput := map[string]interface{}{
-		"firstName": "Jane",
-		"lastName":  "Smith",
-		"email":     "john.doe@example.com", // Same email
+		"firstName":  "Jane",
+		"lastName":   "Smith",
+		"email":      "john.doe@example.com", // Same email
 		"department": "Engineering",
-		"position":  "Senior Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    95000.0,
+		"position":   "Senior Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     95000.0,
 	}
 
 	result := test.executeGraphQLMutation(ctx, query, map[string]interface{}{"input": secondInput})
@@ -209,13 +209,13 @@ func TestEmployee_UpdatesEmployee(t *testing.T) {
 
 	// First create an employee
 	createInput := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	createQuery := `
@@ -272,13 +272,13 @@ func TestEmployee_DeletesEmployee(t *testing.T) {
 
 	// Create an employee first
 	createInput := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	createQuery := `
@@ -327,13 +327,13 @@ func TestEmployee_ChangesStatus(t *testing.T) {
 
 	// Create an employee first
 	createInput := map[string]interface{}{
-		"firstName": "John",
-		"lastName":  "Doe",
-		"email":     "john.doe@example.com",
+		"firstName":  "John",
+		"lastName":   "Doe",
+		"email":      "john.doe@example.com",
 		"department": "Engineering",
-		"position":  "Software Engineer",
-		"hireDate":  "2023-01-15",
-		"salary":    75000.0,
+		"position":   "Software Engineer",
+		"hireDate":   "2023-01-15",
+		"salary":     75000.0,
 	}
 
 	createQuery := `
