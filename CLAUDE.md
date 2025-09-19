@@ -1,6 +1,6 @@
 # Claude Code Context for Employee Management System
 
-- ALWAYS Use Serena MCP for find, search semantic retrieval and editing files capabilities
+- ALWAYS Use Serena MCP for read, find, search semantic retrieval and editing files capabilities
 - Replace Bash(find, grep, sed, awk) with Serena MCP for file operations
 
 ## Project Overview
