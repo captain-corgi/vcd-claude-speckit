@@ -115,12 +115,12 @@ type EventStoreRepository interface {
 
 // EmployeeFilter defines filtering criteria for employee queries
 type EmployeeFilter struct {
-	Department  *string
-	Status      *EmployeeStatus
-	ManagerID   *uuid.UUID
-	Search      *string
-	MinSalary   *float64
-	MaxSalary   *float64
+	Department   *string
+	Status       *EmployeeStatus
+	ManagerID    *uuid.UUID
+	Search       *string
+	MinSalary    *float64
+	MaxSalary    *float64
 	HireDateFrom *time.Time
 	HireDateTo   *time.Time
 }
@@ -135,24 +135,24 @@ type EmployeeSort struct {
 type EmployeeSortField string
 
 const (
-	SortByEmployeeID      EmployeeSortField = "id"
-	SortByEmployeeName    EmployeeSortField = "name"
-	SortByEmployeeEmail   EmployeeSortField = "email"
-	SortByEmployeeDept    EmployeeSortField = "department"
+	SortByEmployeeID       EmployeeSortField = "id"
+	SortByEmployeeName     EmployeeSortField = "name"
+	SortByEmployeeEmail    EmployeeSortField = "email"
+	SortByEmployeeDept     EmployeeSortField = "department"
 	SortByEmployeePosition EmployeeSortField = "position"
 	SortByEmployeeHireDate EmployeeSortField = "hire_date"
-	SortByEmployeeSalary  EmployeeSortField = "salary"
-	SortByEmployeeStatus  EmployeeSortField = "status"
-	SortByEmployeeCreated EmployeeSortField = "created_at"
+	SortByEmployeeSalary   EmployeeSortField = "salary"
+	SortByEmployeeStatus   EmployeeSortField = "status"
+	SortByEmployeeCreated  EmployeeSortField = "created_at"
 )
 
 // UserFilter defines filtering criteria for user queries
 type UserFilter struct {
-	Role      *UserRole
-	IsActive  *bool
-	Search    *string
-	CreatedFrom *time.Time
-	CreatedTo   *time.Time
+	Role          *UserRole
+	IsActive      *bool
+	Search        *string
+	CreatedFrom   *time.Time
+	CreatedTo     *time.Time
 	LastLoginFrom *time.Time
 	LastLoginTo   *time.Time
 }
@@ -167,24 +167,24 @@ type UserSort struct {
 type UserSortField string
 
 const (
-	SortByUserID       UserSortField = "id"
-	SortByUsername     UserSortField = "username"
-	SortByUserEmail    UserSortField = "email"
-	SortByUserRole     UserSortField = "role"
-	SortByUserActive   UserSortField = "is_active"
-	SortByUserCreated  UserSortField = "created_at"
+	SortByUserID        UserSortField = "id"
+	SortByUsername      UserSortField = "username"
+	SortByUserEmail     UserSortField = "email"
+	SortByUserRole      UserSortField = "role"
+	SortByUserActive    UserSortField = "is_active"
+	SortByUserCreated   UserSortField = "created_at"
 	SortByUserLastLogin UserSortField = "last_login"
 )
 
 // AuditLogFilter defines filtering criteria for audit log queries
 type AuditLogFilter struct {
-	EmployeeID  *uuid.UUID
-	Operation   *string
-	UserID      *string
-	IPAddress   *string
-	FromTime    *time.Time
-	ToTime      *time.Time
-	Operations  []string
+	EmployeeID *uuid.UUID
+	Operation  *string
+	UserID     *string
+	IPAddress  *string
+	FromTime   *time.Time
+	ToTime     *time.Time
+	Operations []string
 }
 
 // AuditLogSort defines sorting criteria for audit log queries
@@ -197,10 +197,10 @@ type AuditLogSort struct {
 type AuditLogSortField string
 
 const (
-	SortByAuditLogID        AuditLogSortField = "id"
-	SortByAuditLogTimestamp AuditLogSortField = "timestamp"
-	SortByAuditLogOperation AuditLogSortField = "operation"
-	SortByAuditLogUserID    AuditLogSortField = "user_id"
+	SortByAuditLogID         AuditLogSortField = "id"
+	SortByAuditLogTimestamp  AuditLogSortField = "timestamp"
+	SortByAuditLogOperation  AuditLogSortField = "operation"
+	SortByAuditLogUserID     AuditLogSortField = "user_id"
 	SortByAuditLogEmployeeID AuditLogSortField = "employee_id"
 )
 
@@ -298,10 +298,10 @@ func (p Pagination) IsCursorBased() bool {
 }
 
 var (
-	ErrRepository = errors.New("repository error")
-	ErrNotFound = errors.New("record not found")
-	ErrDuplicate = errors.New("duplicate record")
-	ErrInvalidFilter = errors.New("invalid filter")
-	ErrInvalidSort = errors.New("invalid sort")
+	ErrRepository        = errors.New("repository error")
+	ErrNotFound          = errors.New("record not found")
+	ErrDuplicate         = errors.New("duplicate record")
+	ErrInvalidFilter     = errors.New("invalid filter")
+	ErrInvalidSort       = errors.New("invalid sort")
 	ErrInvalidPagination = errors.New("invalid pagination")
 )

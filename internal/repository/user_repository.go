@@ -184,9 +184,9 @@ func (r *UserRepository) List(ctx context.Context, filter domain.UserFilter, sor
 		string(domain.SortByUserID):        "id",
 		string(domain.SortByUsername):      "username",
 		string(domain.SortByUserEmail):     "email",
-		string(domain.SortByUserRole):     "role",
-		string(domain.SortByUserActive):   "is_active",
-		string(domain.SortByUserCreated):  "created_at",
+		string(domain.SortByUserRole):      "role",
+		string(domain.SortByUserActive):    "is_active",
+		string(domain.SortByUserCreated):   "created_at",
 		string(domain.SortByUserLastLogin): "last_login",
 	}
 
@@ -408,8 +408,8 @@ func (r *UserRepository) CreateMany(ctx context.Context, users []*domain.User) e
 // CountUsersByRole counts users by their role
 func (r *UserRepository) CountUsersByRole(ctx context.Context) (map[string]int64, error) {
 	var results []struct {
-	Role string
-	Count int64
+		Role  string
+		Count int64
 	}
 
 	err := r.db.WithContext(ctx).

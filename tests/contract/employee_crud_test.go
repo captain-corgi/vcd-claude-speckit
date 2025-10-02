@@ -78,7 +78,7 @@ func testCreateEmployeeOperations(t *testing.T, client *helpers.GraphQLClient) {
 				"email":      "john.doe@example.com",
 				"department": "Engineering",
 				"position":   "Software Engineer",
-				"status":      "ACTIVE",
+				"status":     "ACTIVE",
 			},
 		},
 		{
@@ -536,7 +536,7 @@ func testChangeEmployeeStatusOperations(t *testing.T, client *helpers.GraphQLCli
 		},
 		{
 			name:          "Change Status for Non-existent Employee",
-			 employeeId:   "non-existent-employee",
+			employeeId:    "non-existent-employee",
 			newStatus:     "ON_LEAVE",
 			expectedError: true,
 			errorContains: "not found",
@@ -741,7 +741,7 @@ func testEmployeeAuthenticationRequirements(t *testing.T, client *helpers.GraphQ
 		errorContains string
 	}{
 		{
-			name:  "Create Employee Without Authentication",
+			name: "Create Employee Without Authentication",
 			query: `
 				mutation CreateEmployee($input: CreateEmployeeInput!) {
 					createEmployee(input: $input) {
@@ -762,7 +762,7 @@ func testEmployeeAuthenticationRequirements(t *testing.T, client *helpers.GraphQ
 			errorContains: "authentication",
 		},
 		{
-			name:  "Update Employee Without Authentication",
+			name: "Update Employee Without Authentication",
 			query: `
 				mutation UpdateEmployee($id: ID!, $input: UpdateEmployeeInput!) {
 					updateEmployee(id: $id, input: $input) {
@@ -778,7 +778,7 @@ func testEmployeeAuthenticationRequirements(t *testing.T, client *helpers.GraphQ
 			errorContains: "authentication",
 		},
 		{
-			name:  "Delete Employee Without Authentication",
+			name: "Delete Employee Without Authentication",
 			query: `
 				mutation DeleteEmployee($id: ID!) {
 					deleteEmployee(id: $id)
@@ -788,7 +788,7 @@ func testEmployeeAuthenticationRequirements(t *testing.T, client *helpers.GraphQ
 			errorContains: "authentication",
 		},
 		{
-			name:  "Get Employee Without Authentication",
+			name: "Get Employee Without Authentication",
 			query: `
 				query GetEmployee($id: ID!) {
 					employee(id: $id) {
@@ -801,7 +801,7 @@ func testEmployeeAuthenticationRequirements(t *testing.T, client *helpers.GraphQ
 			errorContains: "authentication",
 		},
 		{
-			name:  "List Employees Without Authentication",
+			name: "List Employees Without Authentication",
 			query: `
 				query {
 					employees(first: 10) {
@@ -858,13 +858,13 @@ func assertContractError(t *testing.T, resp *helpers.GraphQLResponse, operation 
 	for _, err := range resp.Errors {
 		errorMsg := err.Message
 		if containsIgnoreCase(errorMsg, "cannot query") ||
-		   containsIgnoreCase(errorMsg, "unknown type") ||
-		   containsIgnoreCase(errorMsg, "field") ||
-		   containsIgnoreCase(errorMsg, "mutation") ||
-		   containsIgnoreCase(errorMsg, "query") ||
-		   containsIgnoreCase(errorMsg, "not found") ||
-		   containsIgnoreCase(errorMsg, "undefined") ||
-		   containsIgnoreCase(errorMsg, operation) {
+			containsIgnoreCase(errorMsg, "unknown type") ||
+			containsIgnoreCase(errorMsg, "field") ||
+			containsIgnoreCase(errorMsg, "mutation") ||
+			containsIgnoreCase(errorMsg, "query") ||
+			containsIgnoreCase(errorMsg, "not found") ||
+			containsIgnoreCase(errorMsg, "undefined") ||
+			containsIgnoreCase(errorMsg, operation) {
 			foundContractError = true
 			break
 		}
@@ -899,11 +899,10 @@ func assertConnectionError(t *testing.T, err error, testName string) {
 
 	assert.True(t,
 		containsIgnoreCase(errorMsg, "connection refused") ||
-		containsIgnoreCase(errorMsg, "no such host") ||
-		containsIgnoreCase(errorMsg, "404") ||
-		containsIgnoreCase(errorMsg, "500") ||
-		containsIgnoreCase(errorMsg, "timeout") ||
-		containsIgnoreCase(errorMsg, "unreachable"),
+			containsIgnoreCase(errorMsg, "no such host") ||
+			containsIgnoreCase(errorMsg, "404") ||
+			containsIgnoreCase(errorMsg, "500") ||
+			containsIgnoreCase(errorMsg, "timeout") ||
+			containsIgnoreCase(errorMsg, "unreachable"),
 		"Expected connection error for %s, but got: %v", testName, err)
 }
-

@@ -12,39 +12,39 @@ import (
 
 // Employee represents an employee in the system
 type Employee struct {
-	ID        uuid.UUID
-	FirstName string
-	LastName  string
-	Email     string
-	Phone     string
+	ID         uuid.UUID
+	FirstName  string
+	LastName   string
+	Email      string
+	Phone      string
 	Department string
-	Position  string
-	HireDate  time.Time
-	Salary    float64
-	Status    EmployeeStatus
-	ManagerID *uuid.UUID
-	Address   *Address
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Position   string
+	HireDate   time.Time
+	Salary     float64
+	Status     EmployeeStatus
+	ManagerID  *uuid.UUID
+	Address    *Address
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
 // NewEmployee creates a new Employee with validation
 func NewEmployee(firstName, lastName, email, phone, department, position string, hireDate time.Time, salary float64, managerID *uuid.UUID, address *Address) (*Employee, error) {
 	employee := &Employee{
-		ID:        uuid.New(),
-		FirstName: firstName,
-		LastName:  lastName,
-		Email:     email,
-		Phone:     phone,
+		ID:         uuid.New(),
+		FirstName:  firstName,
+		LastName:   lastName,
+		Email:      email,
+		Phone:      phone,
 		Department: department,
-		Position:  position,
-		HireDate:  hireDate,
-		Salary:    salary,
-		Status:    EmployeeStatusActive,
-		ManagerID: managerID,
-		Address:   address,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		Position:   position,
+		HireDate:   hireDate,
+		Salary:     salary,
+		Status:     EmployeeStatusActive,
+		ManagerID:  managerID,
+		Address:    address,
+		CreatedAt:  time.Now(),
+		UpdatedAt:  time.Now(),
 	}
 
 	if err := employee.Validate(); err != nil {
@@ -413,29 +413,29 @@ func (e *Employee) Clone() *Employee {
 	}
 
 	return &Employee{
-		ID:        e.ID,
-		FirstName: e.FirstName,
-		LastName:  e.LastName,
-		Email:     e.Email,
-		Phone:     e.Phone,
+		ID:         e.ID,
+		FirstName:  e.FirstName,
+		LastName:   e.LastName,
+		Email:      e.Email,
+		Phone:      e.Phone,
 		Department: e.Department,
-		Position:  e.Position,
-		HireDate:  e.HireDate,
-		Salary:    e.Salary,
-		Status:    e.Status,
-		ManagerID: managerID,
-		Address:   e.Address.Clone(),
-		CreatedAt: e.CreatedAt,
-		UpdatedAt: e.UpdatedAt,
+		Position:   e.Position,
+		HireDate:   e.HireDate,
+		Salary:     e.Salary,
+		Status:     e.Status,
+		ManagerID:  managerID,
+		Address:    e.Address.Clone(),
+		CreatedAt:  e.CreatedAt,
+		UpdatedAt:  e.UpdatedAt,
 	}
 }
 
 var (
-	ErrInvalidEmployee = errors.New("invalid employee")
-	ErrInvalidEmail = errors.New("invalid email")
-	ErrInvalidPhone = errors.New("invalid phone")
-	ErrInvalidSalary = errors.New("invalid salary")
-	ErrInvalidHireDate = errors.New("invalid hire date")
+	ErrInvalidEmployee    = errors.New("invalid employee")
+	ErrInvalidEmail       = errors.New("invalid email")
+	ErrInvalidPhone       = errors.New("invalid phone")
+	ErrInvalidSalary      = errors.New("invalid salary")
+	ErrInvalidHireDate    = errors.New("invalid hire date")
 	ErrEmployeeTerminated = errors.New("employee is terminated")
-	ErrCannotSelfManage = errors.New("employee cannot be their own manager")
+	ErrCannotSelfManage   = errors.New("employee cannot be their own manager")
 )

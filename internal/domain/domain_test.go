@@ -295,11 +295,11 @@ func TestUserAuthentication(t *testing.T) {
 
 func TestUserPermissions(t *testing.T) {
 	tests := []struct {
-		name         string
-		role         UserRole
-		canManage    bool
-		canDelete    bool
-		canViewLogs  bool
+		name        string
+		role        UserRole
+		canManage   bool
+		canDelete   bool
+		canViewLogs bool
 	}{
 		{"Admin permissions", UserRoleAdmin, true, true, true},
 		{"Manager permissions", UserRoleManager, false, false, true},
@@ -328,7 +328,7 @@ func TestAuditLogCreation(t *testing.T) {
 		userID,
 		nil,
 		map[string]interface{}{
-			"name": "John Doe",
+			"name":  "John Doe",
 			"email": "john.doe@example.com",
 		},
 		"192.168.1.1",

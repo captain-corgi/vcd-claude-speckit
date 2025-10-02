@@ -518,8 +518,8 @@ func testAuditLogCreationValidation(t *testing.T, client *helpers.GraphQLClient)
 				}`,
 			variables: map[string]interface{}{
 				"input": map[string]interface{}{
-					"operation":  "CREATE",
-					"userId":     "user123",
+					"operation": "CREATE",
+					"userId":    "user123",
 					"ipAddress": "192.168.1.1",
 				},
 			},
@@ -537,7 +537,7 @@ func testAuditLogCreationValidation(t *testing.T, client *helpers.GraphQLClient)
 				"input": map[string]interface{}{
 					"operation":  "INVALID_OPERATION",
 					"userId":     "user123",
-					"ipAddress": "192.168.1.1",
+					"ipAddress":  "192.168.1.1",
 					"employeeId": "emp123",
 				},
 			},
@@ -555,7 +555,7 @@ func testAuditLogCreationValidation(t *testing.T, client *helpers.GraphQLClient)
 				"input": map[string]interface{}{
 					"operation":  "CREATE",
 					"userId":     "user123",
-					"ipAddress": "invalid-ip",
+					"ipAddress":  "invalid-ip",
 					"employeeId": "emp123",
 				},
 			},
@@ -571,8 +571,8 @@ func testAuditLogCreationValidation(t *testing.T, client *helpers.GraphQLClient)
 				}`,
 			variables: map[string]interface{}{
 				"input": map[string]interface{}{
-					"operation":  "CREATE",
-					"userId":     "user123",
+					"operation": "CREATE",
+					"userId":    "user123",
 					"ipAddress": "192.168.1.1",
 				},
 			},
@@ -637,7 +637,7 @@ func testAuditActionTypes(t *testing.T, client *helpers.GraphQLClient) {
 				"input": map[string]interface{}{
 					"operation":  tc.operation,
 					"userId":     "user123",
-					"ipAddress": "192.168.1.1",
+					"ipAddress":  "192.168.1.1",
 					"employeeId": "emp123",
 				},
 			}
@@ -807,7 +807,7 @@ func testAuditLogImmutability(t *testing.T, client *helpers.GraphQLClient) {
 				"input": map[string]interface{}{
 					"operation":  "CREATE",
 					"userId":     "user123",
-					"ipAddress": "192.168.1.1",
+					"ipAddress":  "192.168.1.1",
 					"employeeId": "emp123",
 					"timestamp":  time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC), // Past timestamp
 				},

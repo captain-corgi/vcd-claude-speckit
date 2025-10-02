@@ -18,15 +18,15 @@ type GraphQLRequest struct {
 
 // GraphQLResponse represents a GraphQL response
 type GraphQLResponse struct {
-	Data   interface{}            `json:"data"`
-	Errors []GraphQLError          `json:"errors,omitempty"`
+	Data   interface{}    `json:"data"`
+	Errors []GraphQLError `json:"errors,omitempty"`
 }
 
 // GraphQLError represents a GraphQL error
 type GraphQLError struct {
-	Message   string                 `json:"message"`
-	Locations []GraphQLLocation      `json:"locations,omitempty"`
-	Path      []string               `json:"path,omitempty"`
+	Message    string                 `json:"message"`
+	Locations  []GraphQLLocation      `json:"locations,omitempty"`
+	Path       []string               `json:"path,omitempty"`
 	Extensions map[string]interface{} `json:"extensions,omitempty"`
 }
 

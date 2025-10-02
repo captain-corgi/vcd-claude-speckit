@@ -79,28 +79,28 @@ type EmployeeCreatedEvent struct {
 // NewEmployeeCreatedEvent creates a new EmployeeCreatedEvent
 func NewEmployeeCreatedEvent(employee *Employee) *EmployeeCreatedEvent {
 	data := map[string]interface{}{
-		"employeeId":   employee.ID,
-		"firstName":    employee.FirstName,
-		"lastName":     employee.LastName,
-		"email":        employee.Email,
-		"department":   employee.Department,
-		"position":     employee.Position,
-		"salary":       employee.Salary,
-		"status":       string(employee.Status),
-		"hasManager":   employee.ManagerID != nil,
-		"hasAddress":   employee.Address != nil,
+		"employeeId": employee.ID,
+		"firstName":  employee.FirstName,
+		"lastName":   employee.LastName,
+		"email":      employee.Email,
+		"department": employee.Department,
+		"position":   employee.Position,
+		"salary":     employee.Salary,
+		"status":     string(employee.Status),
+		"hasManager": employee.ManagerID != nil,
+		"hasAddress": employee.Address != nil,
 	}
 
 	return &EmployeeCreatedEvent{
 		BaseDomainEvent: NewBaseDomainEvent(employee.ID, "employee.created", data),
-		Employee:       employee,
+		Employee:        employee,
 	}
 }
 
 // EmployeeUpdatedEvent is fired when an employee is updated
 type EmployeeUpdatedEvent struct {
 	BaseDomainEvent
-	Employee    *Employee
+	Employee      *Employee
 	ChangedFields []string
 }
 
@@ -129,7 +129,7 @@ func NewEmployeeUpdatedEvent(employee *Employee, changedFields []string) *Employ
 type EmployeeDeletedEvent struct {
 	BaseDomainEvent
 	EmployeeID uuid.UUID
-	OldData   map[string]interface{}
+	OldData    map[string]interface{}
 }
 
 // NewEmployeeDeletedEvent creates a new EmployeeDeletedEvent
@@ -141,18 +141,18 @@ func NewEmployeeDeletedEvent(employeeID uuid.UUID, oldData map[string]interface{
 
 	return &EmployeeDeletedEvent{
 		BaseDomainEvent: NewBaseDomainEvent(employeeID, "employee.deleted", data),
-		EmployeeID:     employeeID,
-		OldData:       oldData,
+		EmployeeID:      employeeID,
+		OldData:         oldData,
 	}
 }
 
 // EmployeeStatusChangedEvent is fired when an employee's status changes
 type EmployeeStatusChangedEvent struct {
 	BaseDomainEvent
-	EmployeeID    uuid.UUID
-	OldStatus     EmployeeStatus
-	NewStatus     EmployeeStatus
-	ChangedBy     string // User ID who made the change
+	EmployeeID uuid.UUID
+	OldStatus  EmployeeStatus
+	NewStatus  EmployeeStatus
+	ChangedBy  string // User ID who made the change
 }
 
 // NewEmployeeStatusChangedEvent creates a new EmployeeStatusChangedEvent
@@ -166,21 +166,21 @@ func NewEmployeeStatusChangedEvent(employeeID uuid.UUID, oldStatus, newStatus Em
 
 	return &EmployeeStatusChangedEvent{
 		BaseDomainEvent: NewBaseDomainEvent(employeeID, "employee.status_changed", data),
-		EmployeeID:     employeeID,
-		OldStatus:      oldStatus,
-		NewStatus:      newStatus,
-		ChangedBy:      changedBy,
+		EmployeeID:      employeeID,
+		OldStatus:       oldStatus,
+		NewStatus:       newStatus,
+		ChangedBy:       changedBy,
 	}
 }
 
 // EmployeeSalaryChangedEvent is fired when an employee's salary changes
 type EmployeeSalaryChangedEvent struct {
 	BaseDomainEvent
-	EmployeeID  uuid.UUID
-	OldSalary   float64
-	NewSalary   float64
-	ChangeType  string // "increase", "decrease", "same"
-	ChangedBy   string
+	EmployeeID uuid.UUID
+	OldSalary  float64
+	NewSalary  float64
+	ChangeType string // "increase", "decrease", "same"
+	ChangedBy  string
 }
 
 // NewEmployeeSalaryChangedEvent creates a new EmployeeSalaryChangedEvent
@@ -193,13 +193,13 @@ func NewEmployeeSalaryChangedEvent(employeeID uuid.UUID, oldSalary, newSalary fl
 	}
 
 	data := map[string]interface{}{
-		"employeeId": employeeID,
-		"oldSalary":  oldSalary,
-		"newSalary":  newSalary,
-		"changeType": changeType,
-		"changeAmount": newSalary - oldSalary,
+		"employeeId":    employeeID,
+		"oldSalary":     oldSalary,
+		"newSalary":     newSalary,
+		"changeType":    changeType,
+		"changeAmount":  newSalary - oldSalary,
 		"changePercent": ((newSalary - oldSalary) / oldSalary) * 100,
-		"changedBy":  changedBy,
+		"changedBy":     changedBy,
 	}
 
 	return &EmployeeSalaryChangedEvent{
@@ -275,14 +275,14 @@ type AuditLogCreatedEvent struct {
 // NewAuditLogCreatedEvent creates a new AuditLogCreatedEvent
 func NewAuditLogCreatedEvent(auditLog *AuditLog) *AuditLogCreatedEvent {
 	data := map[string]interface{}{
-		"auditLogId":  auditLog.ID,
-		"employeeId":  auditLog.EmployeeID,
-		"operation":   auditLog.Operation,
-		"userId":      auditLog.UserID,
-		"ipAddress":   auditLog.IPAddress,
-		"isCreation":  auditLog.IsCreation(),
-		"isDeletion":  auditLog.IsDeletion(),
-		"isUpdate":    auditLog.IsUpdate(),
+		"auditLogId":    auditLog.ID,
+		"employeeId":    auditLog.EmployeeID,
+		"operation":     auditLog.Operation,
+		"userId":        auditLog.UserID,
+		"ipAddress":     auditLog.IPAddress,
+		"isCreation":    auditLog.IsCreation(),
+		"isDeletion":    auditLog.IsDeletion(),
+		"isUpdate":      auditLog.IsUpdate(),
 		"changedFields": auditLog.GetChangedFields(),
 	}
 
@@ -347,7 +347,7 @@ type EventStore interface {
 }
 
 var (
-	ErrInvalidEvent = errors.New("invalid domain event")
-	ErrEventHandlingFailed = errors.New("event handling failed")
+	ErrInvalidEvent         = errors.New("invalid domain event")
+	ErrEventHandlingFailed  = errors.New("event handling failed")
 	ErrNoHandlersRegistered = errors.New("no handlers registered for event type")
 )

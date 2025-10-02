@@ -160,10 +160,10 @@ func (r *AuditLogRepository) Find(ctx context.Context, filter domain.AuditLogFil
 
 	// Apply sorting
 	sortField := map[string]string{
-		string(domain.SortByAuditLogID):        "id",
-		string(domain.SortByAuditLogTimestamp): "timestamp",
-		string(domain.SortByAuditLogOperation): "operation",
-		string(domain.SortByAuditLogUserID):    "user_id",
+		string(domain.SortByAuditLogID):         "id",
+		string(domain.SortByAuditLogTimestamp):  "timestamp",
+		string(domain.SortByAuditLogOperation):  "operation",
+		string(domain.SortByAuditLogUserID):     "user_id",
 		string(domain.SortByAuditLogEmployeeID): "employee_id",
 	}
 
@@ -258,8 +258,8 @@ func (r *AuditLogRepository) Count(ctx context.Context, filter domain.AuditLogFi
 // GetOperationsSummary returns a summary of operations within a time range
 func (r *AuditLogRepository) GetOperationsSummary(ctx context.Context, start, end time.Time) (map[string]int64, error) {
 	var results []struct {
-	Operation string
-	Count     int64
+		Operation string
+		Count     int64
 	}
 
 	err := r.db.WithContext(ctx).
@@ -393,17 +393,17 @@ func (r *AuditLogRepository) GetAuditLogStats(ctx context.Context) (*AuditLogSta
 	}
 
 	return &AuditLogStats{
-		Total:       total,
-		TodayCount:  todayCount,
-		ThisWeekCount: thisWeekCount,
+		Total:          total,
+		TodayCount:     todayCount,
+		ThisWeekCount:  thisWeekCount,
 		ThisMonthCount: thisMonthCount,
 	}, nil
 }
 
 // AuditLogStats contains statistics about audit logs
 type AuditLogStats struct {
-	Total       int64
-	TodayCount  int64
-	ThisWeekCount int64
+	Total          int64
+	TodayCount     int64
+	ThisWeekCount  int64
 	ThisMonthCount int64
 }

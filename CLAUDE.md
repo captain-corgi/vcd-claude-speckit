@@ -1,7 +1,6 @@
-# Claude Code Context for Employee Management System
+# CLAUDE.md
 
-- ALWAYS Use Serena MCP for read, find, search semantic retrieval and editing files capabilities
-- Replace Bash(find, grep, sed, awk) with Serena MCP for file operations
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
@@ -9,13 +8,14 @@ Building an employee management web server with GraphQL API using Go, following 
 
 ## Architecture
 
-- **Language**: Go 1.21+
+- **Language**: Go 1.24.3
 - **HTTP Framework**: Gin
-- **API**: GraphQL with gqlgen
+- **API**: GraphQL (implementation in progress)
 - **Database**: PostgreSQL with GORM
-- **Configuration**: Viper
 - **Testing**: Table-driven testing with testcontainers
 - **Authentication**: JWT with role-based access control
+- **Infrastructure**: Docker Compose with PostgreSQL and Redis
+- **Dependencies**: Managed with Go modules
 
 ## Recent Changes (Last 3)
 
@@ -109,30 +109,52 @@ func (r *employeeRepository) Create(ctx context.Context, employee *domain.Employ
 - Use real dependencies (actual PostgreSQL, not mocks)
 - Contract tests first, then integration, then unit tests
 
-## Package Structure
+## Architecture Overview
+
+### Clean Architecture Implementation
+
+The project follows Domain-Driven Design with Clean Architecture principles:
 
 ```
-backend/
-├── cmd/
-│   ├── server/         # Main server application
-│   └── migrate/        # Database migrations
-├── internal/
-│   ├── domain/         # Business logic and entities
-│   │   ├── employee.go
-│   │   └── user.go
-│   ├── service/        # Application services
-│   ├── repository/     # Data access layer
-│   ├── api/           # GraphQL resolvers and handlers
-│   └── middleware/    # Authentication, logging
-├── pkg/
-│   ├── database/      # Database setup
-│   ├── logger/        # Logging configuration
-│   └── config/        # Application config
-└── tests/
-    ├── contract/      # Contract tests
-    ├── integration/   # Integration tests
-    └── unit/          # Unit tests
+internal/
+├── domain/            # Core business logic (entities, services, events)
+│   ├── employee.go    # Employee entity with validation
+│   ├── user.go        # User entity and roles
+│   ├── *.go           # Other domain entities
+│   └── *_test.go      # Domain unit tests
+├── service/           # Application services orchestrate domain logic
+│   ├── employee_service.go    # Employee business operations
+│   ├── user_service.go        # User management
+│   └── auth_service.go        # Authentication
+├── repository/        # Data access layer (GORM models + CRUD)
+│   ├── *_model.go     # GORM database models
+│   └── *_repository.go # Repository implementations
+├── api/              # GraphQL API layer (not yet implemented)
+├── middleware/       # HTTP middleware (auth, logging, CORS)
+└── config/           # Application configuration
+
+pkg/
+└── database/         # Database connection and setup
+
+tests/
+├── helpers/          # Test utilities and fixtures
+├── contract/         # API contract tests (RED phase tests)
+├── integration/      # Full stack tests with real DB
+└── unit/            # Repository and service unit tests
+
+cmd/
+├── server/          # Main application entry point (not yet implemented)
+└── migrate/         # Database migration tool
 ```
+
+### Key Architecture Patterns
+
+- **Domain-First**: Business logic lives in `internal/domain/` with no external dependencies
+- **Repository Pattern**: Data access abstracted through repository interfaces
+- **Service Layer**: Application services orchestrate domain operations
+- **Event-Driven**: Domain events for audit logging and decoupling
+- **Contract Testing**: RED-GREEN-REFACTOR TDD with contract tests defining API behavior
+- **Testcontainers**: Real PostgreSQL for integration testing, no mocks
 
 ## Dependencies Management
 
@@ -141,80 +163,148 @@ backend/
 - Prefer standard library where possible
 - Document non-standard dependencies
 
-## Configuration
+## Environment and Infrastructure
 
-- Use Viper for configuration management
-- Support environment variables and config files
-- Provide sensible defaults
-- Include configuration validation
+### Database Setup
+- **PostgreSQL**: Primary data store (Docker Compose on port 5432)
+- **Redis**: Caching and sessions (Docker Compose on port 6379)
+- **Connection Pooling**: GORM with configurable pool settings
+- **Migrations**: Version-controlled schema changes
 
-## Logging
+### Configuration
+- Environment-based configuration with `.env` file support
+- Use `.env.example` as template for required variables
+- Key configuration areas: Database, Redis, JWT, CORS, Rate limiting
+- Docker Compose provides development database services
 
-- Use Zap for structured logging
-- Include request correlation IDs
-- Log at appropriate levels (debug, info, warn, error)
-- Include relevant context in log messages
+### Development Workflow
+1. **Environment Setup**: `make dev-setup` (starts PostgreSQL + Redis + runs migrations)
+2. **Test-Driven Development**: Write failing contract tests first
+3. **Implementation**: Make tests pass following domain-first approach
+4. **Quality Gates**: `make dev-build` ensures code quality before commits
 
-## Error Handling
+## Current Implementation Status
 
-- Use proper error wrapping with fmt.Errorf
-- Provide clear error messages
-- Include error codes for client consumption
-- Log errors with appropriate context
+### ✅ Implemented
+- Domain entities with validation (Employee, User, Address, etc.)
+- Repository layer with GORM models and basic CRUD operations
+- Service layer with business logic orchestration
+- Event system for audit logging
+- Contract test suite defining expected API behavior
+- Database infrastructure with Docker Compose
+- Migration tooling
 
-## Security
+### 🚧 In Progress / Not Yet Implemented
+- GraphQL API layer and resolvers
+- HTTP server with Gin framework
+- Authentication middleware with JWT
+- Main application entry point (`cmd/server/`)
+- HTTP middleware (CORS, logging, rate limiting)
+- GraphQL schema generation with gqlgen
 
-- Always use parameterized queries to prevent SQL injection
-- Validate all input data
-- Use HTTPS in production
-- Implement proper CORS policies
-- Rate limiting for API endpoints
+## Key Implementation Patterns
 
-## Performance
+### Domain Entity Pattern
+```go
+// Entity with business logic and validation
+func NewEmployee(firstName, lastName, email string) (*Employee, error) {
+    employee := &Employee{...}
+    return employee, employee.Validate()
+}
 
-- Use database connection pooling
-- Implement proper indexing strategy
-- Cache frequently accessed data when appropriate
-- Monitor and optimize query performance
-
-## Development Workflow
-
-1. Write failing test (RED)
-2. Make test pass (GREEN)
-3. Refactor code
-4. Run all tests
-5. Commit changes with descriptive message
-6. Repeat
-
-## Testing Commands
-
-```bash
-# Run all tests
-go test ./...
-
-# Run specific test type
-go test ./tests/contract/...
-go test ./tests/integration/...
-go test ./tests/unit/...
-
-# Run with coverage
-go test -cover ./...
-
-# Run tests with verbose output
-go test -v ./...
+func (e *Employee) Validate() error {
+    // Business validation rules
+}
 ```
 
-## Build Commands
+### Repository Pattern
+```go
+// Interface in domain layer
+type EmployeeRepository interface {
+    Create(ctx context.Context, employee *Employee) error
+    GetByID(ctx context.Context, id uuid.UUID) (*Employee, error)
+}
 
+// GORM implementation in repository layer
+type EmployeeRepository struct {
+    db *gorm.DB
+}
+```
+
+### Service Layer Pattern
+```go
+// Orchestrates domain operations with audit logging
+func (s *EmployeeService) CreateEmployee(ctx context.Context, ...) (*Employee, error) {
+    // Business validation
+    // Repository operations
+    // Event publishing
+    // Audit logging
+}
+```
+
+### Test-Driven Development
+- Contract tests define expected API behavior before implementation
+- Integration tests use real PostgreSQL via testcontainers
+- Unit tests validate domain logic in isolation
+- All tests follow table-driven pattern
+
+## Common Commands
+
+### Development Setup
 ```bash
-# Build the application
+# Set up development environment
+make dev-setup        # Start Docker services + run migrations
+
+# Build and run
+make build            # Build to bin/server
+make run              # Run server directly
+make tidy             # Tidy and vendor dependencies
+```
+
+### Testing
+```bash
+# Run all tests
+make test             # Go test -v ./...
+make test-all         # Run with coverage report (generates coverage.html)
+make test-contract    # Contract tests only (./tests/contract/...)
+make test-integration # Integration tests only (./tests/integration/...)
+make test-unit        # Unit tests only (./tests/unit/...)
+make dev-test         # Quick contract test check
+```
+
+### Database Operations
+```bash
+make migrate-up       # Run migrations
+make migrate-down     # Rollback migrations
+make migrate-create name=migration_name  # Create new migration
+```
+
+### Code Quality
+```bash
+make lint             # Run golangci-lint
+make fmt              # Format code
+make clean            # Clean build artifacts
+make dev-build        # Format + lint + test + build
+```
+
+### Docker Infrastructure
+```bash
+make docker-up        # Start PostgreSQL and Redis
+make docker-down      # Stop services
+```
+
+### Go Commands (Alternative to Makefile)
+```bash
+# Build
 go build -o bin/server cmd/server/main.go
 
-# Run with hot reload (during development)
-go run cmd/server/main.go
+# Test
+go test -v ./...
+go test -v -coverprofile=coverage.out ./... && go tool cover -html=coverage.out -o coverage.html
 
-# Run database migrations
-go run cmd/migrate/main.go
+# Database
+go run cmd/migrate/main.go up
+go run cmd/migrate/main.go down
 ```
 
 <!-- MANUAL ADDITIONS SECTION -->

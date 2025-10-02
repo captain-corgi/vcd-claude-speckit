@@ -174,7 +174,7 @@ func (a *Address) Clone() *Address {
 }
 
 var (
-	ErrInvalidAddress = errors.New("invalid address")
-	ErrInvalidPostalCode = errors.New("invalid postal code")
+	ErrInvalidAddress       = errors.New("invalid address")
+	ErrInvalidPostalCode    = errors.New("invalid postal code")
 	ErrAddressFieldRequired = errors.New("address field is required")
 )

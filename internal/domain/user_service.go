@@ -11,9 +11,9 @@ import (
 
 // UserService handles business logic for user operations
 type UserService struct {
-	userRepo      UserRepository
-	auditRepo     AuditLogRepository
-	eventStore    EventStoreRepository
+	userRepo        UserRepository
+	auditRepo       AuditLogRepository
+	eventStore      EventStoreRepository
 	eventDispatcher *EventDispatcher
 }
 
@@ -490,8 +490,8 @@ func (s *UserService) createAuditLogForUserCreation(user *User, userID, ipAddres
 func (s *UserService) createAuditLogForPasswordChange(user *User, changedBy, method, ipAddress, userAgent string) *AuditLog {
 	newValues := map[string]interface{}{
 		"passwordChanged": true,
-		"changedBy":      changedBy,
-		"method":         method,
+		"changedBy":       changedBy,
+		"method":          method,
 	}
 
 	auditLog, err := NewAuditLog(
@@ -598,7 +598,7 @@ func (s *UserService) GetUserActivity(ctx context.Context, userID string, start,
 }
 
 var (
-	ErrUserNotFound = errors.New("user not found")
+	ErrUserNotFound          = errors.New("user not found")
 	ErrUsernameAlreadyExists = errors.New("username already exists")
-	ErrInvalidCredentials = errors.New("invalid credentials")
+	ErrInvalidCredentials    = errors.New("invalid credentials")
 )

@@ -124,9 +124,9 @@ func testGraphQLEndpointAvailability(t *testing.T, client *helpers.GraphQLClient
 		// Connection errors are expected in RED phase
 		assert.True(t,
 			strings.Contains(err.Error(), "connection refused") ||
-			strings.Contains(err.Error(), "no such host") ||
-			strings.Contains(err.Error(), "404") ||
-			strings.Contains(err.Error(), "500"),
+				strings.Contains(err.Error(), "no such host") ||
+				strings.Contains(err.Error(), "404") ||
+				strings.Contains(err.Error(), "500"),
 			"Expected connection error, but got: %v", err)
 	}
 }
@@ -185,9 +185,9 @@ func testQueryTypesSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -269,9 +269,9 @@ func testMutationTypesSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -333,9 +333,9 @@ func testInputTypesSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -398,9 +398,9 @@ func testEnumTypesSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -452,9 +452,9 @@ func testCustomScalarsSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -489,9 +489,9 @@ func testEmployeeTypeFields(t *testing.T, client *helpers.GraphQLClient) {
 	} else {
 		assert.True(t,
 			strings.Contains(err.Error(), "connection refused") ||
-			strings.Contains(err.Error(), "no such host") ||
-			strings.Contains(err.Error(), "404") ||
-			strings.Contains(err.Error(), "500"),
+				strings.Contains(err.Error(), "no such host") ||
+				strings.Contains(err.Error(), "404") ||
+				strings.Contains(err.Error(), "500"),
 			"Expected connection error, but got: %v", err)
 	}
 }
@@ -522,9 +522,9 @@ func testAddressEmbeddedType(t *testing.T, client *helpers.GraphQLClient) {
 	} else {
 		assert.True(t,
 			strings.Contains(err.Error(), "connection refused") ||
-			strings.Contains(err.Error(), "no such host") ||
-			strings.Contains(err.Error(), "404") ||
-			strings.Contains(err.Error(), "500"),
+				strings.Contains(err.Error(), "no such host") ||
+				strings.Contains(err.Error(), "404") ||
+				strings.Contains(err.Error(), "500"),
 			"Expected connection error, but got: %v", err)
 	}
 }
@@ -568,9 +568,9 @@ func testPaginationSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -617,9 +617,9 @@ func testAuthenticationSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -671,9 +671,9 @@ func testAuditLogSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -730,9 +730,9 @@ func testUserManagementSchema(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -789,9 +789,9 @@ func testValidationRules(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}

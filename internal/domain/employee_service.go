@@ -11,9 +11,9 @@ import (
 
 // EmployeeService handles business logic for employee operations
 type EmployeeService struct {
-	employeeRepo EmployeeRepository
-	auditRepo    AuditLogRepository
-	eventStore   EventStoreRepository
+	employeeRepo    EmployeeRepository
+	auditRepo       AuditLogRepository
+	eventStore      EventStoreRepository
 	eventDispatcher *EventDispatcher
 }
 
@@ -615,8 +615,8 @@ func (s *EmployeeService) createAuditLogForSalaryChange(employee *Employee, oldS
 }
 
 var (
-	ErrEmployeeNotFound = errors.New("employee not found")
-	ErrEmailAlreadyExists = errors.New("email already exists")
-	ErrManagerNotFound = errors.New("manager not found")
+	ErrEmployeeNotFound         = errors.New("employee not found")
+	ErrEmailAlreadyExists       = errors.New("email already exists")
+	ErrManagerNotFound          = errors.New("manager not found")
 	ErrEmployeeHasDirectReports = errors.New("employee has direct reports and cannot be deleted")
 )

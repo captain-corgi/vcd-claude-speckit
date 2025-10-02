@@ -27,11 +27,11 @@ type TestEmployee struct {
 
 // TestUser represents test user data
 type TestUser struct {
-	ID       string   `json:"id"`
-	Username string   `json:"username"`
-	Email    string   `json:"email"`
-	Role     string   `json:"role"`
-	IsActive bool     `json:"isActive"`
+	ID       string `json:"id"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	Role     string `json:"role"`
+	IsActive bool   `json:"isActive"`
 }
 
 // GenerateTestEmployee creates a test employee with random data
@@ -46,10 +46,10 @@ func GenerateTestEmployee() *TestEmployee {
 		Status:     "ACTIVE",
 		Address: map[string]interface{}{
 			"street":     fmt.Sprintf("%d Test St", rand.Intn(9999)+1),
-			"city":      RandomCity(),
-			"state":     RandomState(),
+			"city":       RandomCity(),
+			"state":      RandomState(),
 			"postalCode": fmt.Sprintf("%05d", rand.Intn(99999)),
-			"country":   "US",
+			"country":    "US",
 		},
 	}
 }

@@ -354,26 +354,26 @@ func (a *AuditLog) Clone() *AuditLog {
 
 // Standard operations for audit logging
 const (
-	OperationCreateEmployee      = "employee:create"
-	OperationUpdateEmployee      = "employee:update"
-	OperationDeleteEmployee      = "employee:delete"
-	OperationChangeStatus        = "employee:change_status"
-	OperationUpdateSalary        = "employee:update_salary"
-	OperationUpdatePosition      = "employee:update_position"
-	OperationUpdateAddress       = "employee:update_address"
-	OperationSetManager          = "employee:set_manager"
-	OperationCreateUser          = "user:create"
-	OperationUpdateUser          = "user:update"
-	OperationDeleteUser          = "user:delete"
-	OperationUserLogin           = "user:login"
-	OperationUserLogout          = "user:logout"
-	OperationPasswordChange      = "user:password_change"
-	OperationPasswordReset       = "user:password_reset"
-	OperationSystemAction        = "system:action"
+	OperationCreateEmployee = "employee:create"
+	OperationUpdateEmployee = "employee:update"
+	OperationDeleteEmployee = "employee:delete"
+	OperationChangeStatus   = "employee:change_status"
+	OperationUpdateSalary   = "employee:update_salary"
+	OperationUpdatePosition = "employee:update_position"
+	OperationUpdateAddress  = "employee:update_address"
+	OperationSetManager     = "employee:set_manager"
+	OperationCreateUser     = "user:create"
+	OperationUpdateUser     = "user:update"
+	OperationDeleteUser     = "user:delete"
+	OperationUserLogin      = "user:login"
+	OperationUserLogout     = "user:logout"
+	OperationPasswordChange = "user:password_change"
+	OperationPasswordReset  = "user:password_reset"
+	OperationSystemAction   = "system:action"
 )
 
 var (
-	ErrInvalidAuditLog = errors.New("invalid audit log")
+	ErrInvalidAuditLog  = errors.New("invalid audit log")
 	ErrInvalidOperation = errors.New("invalid operation")
 	ErrInvalidIPAddress = errors.New("invalid IP address")
 )

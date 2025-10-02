@@ -19,11 +19,11 @@ type AuditLog struct {
 	Timestamp  time.Time `gorm:"not null;index"`
 
 	// JSON fields for storing old and new values as JSON
-	OldValues  string `gorm:"type:text;not null"`
-	NewValues  string `gorm:"type:text;not null"`
+	OldValues string `gorm:"type:text;not null"`
+	NewValues string `gorm:"type:text;not null"`
 
-	IPAddress  string `gorm:"size:45;not null;index"`
-	UserAgent  string `gorm:"size:500"`
+	IPAddress string `gorm:"size:45;not null;index"`
+	UserAgent string `gorm:"size:500"`
 
 	CreatedAt time.Time
 }

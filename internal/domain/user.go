@@ -451,12 +451,12 @@ func userPluralS(n int) string {
 }
 
 var (
-	ErrInvalidUser = errors.New("invalid user")
-	ErrInvalidUsername = errors.New("invalid username")
-	ErrUserNotActive = errors.New("user is not active")
-	ErrInvalidPassword = errors.New("invalid password")
-	ErrPasswordMismatch = errors.New("password does not match")
-	ErrWeakPassword = errors.New("password is too weak")
-	ErrUserAlreadyActive = errors.New("user is already active")
+	ErrInvalidUser         = errors.New("invalid user")
+	ErrInvalidUsername     = errors.New("invalid username")
+	ErrUserNotActive       = errors.New("user is not active")
+	ErrInvalidPassword     = errors.New("invalid password")
+	ErrPasswordMismatch    = errors.New("password does not match")
+	ErrWeakPassword        = errors.New("password is too weak")
+	ErrUserAlreadyActive   = errors.New("user is already active")
 	ErrUserAlreadyInactive = errors.New("user is already inactive")
 )

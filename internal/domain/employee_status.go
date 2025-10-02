@@ -76,6 +76,6 @@ func MustParseEmployeeStatus(status string) EmployeeStatus {
 }
 
 var (
-	ErrInvalidEmployeeStatus = errors.New("invalid employee status")
+	ErrInvalidEmployeeStatus   = errors.New("invalid employee status")
 	ErrInvalidStatusTransition = errors.New("invalid employee status transition")
 )

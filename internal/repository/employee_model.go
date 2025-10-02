@@ -11,17 +11,17 @@ import (
 
 // Employee represents the GORM model for the Employee entity
 type Employee struct {
-	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
-	FirstName string    `gorm:"size:50;not null"`
-	LastName  string    `gorm:"size:50;not null"`
-	Email     string    `gorm:"size:100;not null;uniqueIndex"`
-	Phone     string    `gorm:"size:20"`
-	Department string   `gorm:"size:50;not null"`
-	Position  string    `gorm:"size:50;not null"`
-	HireDate  time.Time `gorm:"not null"`
-	Salary    float64   `gorm:"not null"`
-	Status    string    `gorm:"size:20;not null;index"`
-	ManagerID *uuid.UUID `gorm:"type:uuid;index"`
+	ID         uuid.UUID  `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
+	FirstName  string     `gorm:"size:50;not null"`
+	LastName   string     `gorm:"size:50;not null"`
+	Email      string     `gorm:"size:100;not null;uniqueIndex"`
+	Phone      string     `gorm:"size:20"`
+	Department string     `gorm:"size:50;not null"`
+	Position   string     `gorm:"size:50;not null"`
+	HireDate   time.Time  `gorm:"not null"`
+	Salary     float64    `gorm:"not null"`
+	Status     string     `gorm:"size:20;not null;index"`
+	ManagerID  *uuid.UUID `gorm:"type:uuid;index"`
 
 	// Embedded Address
 	Street     string `gorm:"size:200"`

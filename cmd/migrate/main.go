@@ -195,4 +195,3 @@ func createMigrationFile(name string) error {
 
 	return nil
 }
-

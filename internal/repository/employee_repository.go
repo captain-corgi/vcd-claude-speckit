@@ -189,14 +189,14 @@ func (r *EmployeeRepository) List(ctx context.Context, filter domain.EmployeeFil
 
 	// Apply sorting
 	sortField := map[string]string{
-		string(domain.SortByEmployeeID):      "id",
-		string(domain.SortByEmployeeName):    "first_name, last_name",
-		string(domain.SortByEmployeeEmail):   "email",
-		string(domain.SortByEmployeeDept):    "department",
+		string(domain.SortByEmployeeID):       "id",
+		string(domain.SortByEmployeeName):     "first_name, last_name",
+		string(domain.SortByEmployeeEmail):    "email",
+		string(domain.SortByEmployeeDept):     "department",
 		string(domain.SortByEmployeePosition): "position",
 		string(domain.SortByEmployeeHireDate): "hire_date",
-		string(domain.SortByEmployeeSalary):  "salary",
-		string(domain.SortByEmployeeStatus):  "status",
+		string(domain.SortByEmployeeSalary):   "salary",
+		string(domain.SortByEmployeeStatus):   "status",
 		string(domain.SortByEmployeeCreated):  "created_at",
 	}
 

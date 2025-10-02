@@ -146,9 +146,9 @@ func testEmployeeQueriesAccessControl(t *testing.T, client *helpers.GraphQLClien
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			} else {
@@ -156,9 +156,9 @@ func testEmployeeQueriesAccessControl(t *testing.T, client *helpers.GraphQLClien
 				if err != nil {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				} else {
 					require.True(t, resp.HasErrors(), "Expected GraphQL schema errors for unimplemented operation")
@@ -362,9 +362,9 @@ func testEmployeeMutationsAccessControl(t *testing.T, client *helpers.GraphQLCli
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -466,9 +466,9 @@ func testUserManagementAccessControl(t *testing.T, client *helpers.GraphQLClient
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -554,9 +554,9 @@ func testAuditLogAccessControl(t *testing.T, client *helpers.GraphQLClient) {
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -680,9 +680,9 @@ func testAuthenticationFlowAccessControl(t *testing.T, client *helpers.GraphQLCl
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}
@@ -794,9 +794,9 @@ func testSystemConfigurationAccessControl(t *testing.T, client *helpers.GraphQLC
 				} else {
 					assert.True(t,
 						strings.Contains(err.Error(), "connection refused") ||
-						strings.Contains(err.Error(), "no such host") ||
-						strings.Contains(err.Error(), "404") ||
-						strings.Contains(err.Error(), "500"),
+							strings.Contains(err.Error(), "no such host") ||
+							strings.Contains(err.Error(), "404") ||
+							strings.Contains(err.Error(), "500"),
 						"Expected connection error, but got: %v", err)
 				}
 			}

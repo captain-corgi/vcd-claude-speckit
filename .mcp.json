@@ -11,21 +11,6 @@
         "--local-timezone=Asia/Ho_Chi_Minh"
       ]
     },
-    "serena": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant",
-        "--project",
-        "/Users/anh_tuan.l/Workspace/ClaudeCodeWorkspace/vcd-claude-speckit"
-      ],
-      "env": {}
-    },
     "sequential-thinking": {
       "command": "npx",
       "args": [

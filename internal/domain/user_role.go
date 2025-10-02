@@ -119,6 +119,6 @@ func MustParseUserRole(role string) UserRole {
 }
 
 var (
-	ErrInvalidUserRole = errors.New("invalid user role")
+	ErrInvalidUserRole         = errors.New("invalid user role")
 	ErrInsufficientPermissions = errors.New("insufficient permissions")
 )

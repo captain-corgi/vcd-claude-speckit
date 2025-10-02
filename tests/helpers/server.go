@@ -12,9 +12,9 @@ import (
 
 // TestServer represents a test HTTP server
 type TestServer struct {
-	Server   *httptest.Server
-	Router   *gin.Engine
-	BaseURL  string
+	Server  *httptest.Server
+	Router  *gin.Engine
+	BaseURL string
 }
 
 // NewTestServer creates a new test server with Gin router

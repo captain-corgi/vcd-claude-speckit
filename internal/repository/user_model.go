@@ -11,12 +11,12 @@ import (
 
 // User represents the GORM model for the User entity
 type User struct {
-	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
-	Username  string    `gorm:"size:50;not null;uniqueIndex"`
-	Email     string    `gorm:"size:100;not null;uniqueIndex"`
-	Password  string    `gorm:"size:255;not null"`
-	Role      string    `gorm:"size:20;not null;index"`
-	IsActive  bool      `gorm:"not null;default:true;index"`
+	ID        uuid.UUID  `gorm:"type:uuid;primary_key;default:gen_random_uuid()"`
+	Username  string     `gorm:"size:50;not null;uniqueIndex"`
+	Email     string     `gorm:"size:100;not null;uniqueIndex"`
+	Password  string     `gorm:"size:255;not null"`
+	Role      string     `gorm:"size:20;not null;index"`
+	IsActive  bool       `gorm:"not null;default:true;index"`
 	LastLogin *time.Time `gorm:"type:timestamp"`
 	CreatedAt time.Time
 	UpdatedAt time.Time

@@ -1295,4 +1295,3 @@ func testResponseStructureValidation(t *testing.T, client *helpers.GraphQLClient
 		})
 	}
 }
-
